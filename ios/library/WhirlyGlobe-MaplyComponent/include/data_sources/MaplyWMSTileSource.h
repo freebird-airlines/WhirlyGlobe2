@@ -148,6 +148,8 @@
 /// Tile size provided to caller
 @property (nonatomic,readonly) int tileSize;
 
+@property (nonatomic,readonly) NSDictionary * _Nullable parameters;
+
 /// If set we'll ask for a transparent background from the server
 @property (nonatomic) bool transparent;
 
