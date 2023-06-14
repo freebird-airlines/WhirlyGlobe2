@@ -301,7 +301,7 @@
     return self;
 }
 
-- (instancetype)initWithBaseURL:(NSString *)baseURL capabilities:(MaplyWMSCapabilities *)cap layer:(MaplyWMSLayer *)layer style:(MaplyWMSStyle *)style coordSys:(MaplyCoordinateSystem *)coordSys minZoom:(int)inMinZoom maxZoom:(int)inMaxZoom tileSize:(int)tileSize parameters:(NSDictionary *)parameters
+- (instancetype)initWithBaseURL:(NSString *)baseURL capabilities:(MaplyWMSCapabilities *)cap layer:(MaplyWMSLayer *)layer style:(MaplyWMSStyle *)style coordSys:(MaplyCoordinateSystem *)coordSys minZoom:(int)inMinZoom maxZoom:(int)inMaxZoom tileSize:(int)tileSize parameters:(NSDictionary *)parameters headers:(NSDictionary*) headers
 {
     self = [super init];
     
@@ -399,7 +399,16 @@
         }
     
     NSString *fullReqStr = [reqStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-    info.urlReq = [NSURLRequest requestWithURL:[NSURL URLWithString:fullReqStr]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:fullReqStr]];
+    
+    
+    if(_headers)
+        for (id key in _parameters) {
+            NSString* value = [_parameters objectForKey:key];
+            [request setValue:value forHTTPHeaderField:key];
+        }
+    
+    info.urlReq = request;
     
     return info;
 }

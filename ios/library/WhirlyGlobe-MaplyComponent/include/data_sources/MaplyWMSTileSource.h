@@ -150,6 +150,8 @@
 
 @property (nonatomic,readonly) NSDictionary * _Nullable parameters;
 
+@property (nonatomic,readonly) NSDictionary * _Nullable headers;
+
 /// If set we'll ask for a transparent background from the server
 @property (nonatomic) bool transparent;
 
@@ -180,6 +182,8 @@
     @param maxZoom The max zoom level we'll query.
   */
 - (nullable instancetype)initWithBaseURL:(NSString *__nonnull)baseURL capabilities:(MaplyWMSCapabilities *__nullable)cap layer:(MaplyWMSLayer *__nonnull)layer style:(MaplyWMSStyle *__nonnull)style coordSys:(MaplyCoordinateSystem *__nonnull)coordSys minZoom:(int)minZoom maxZoom:(int)maxZoom tileSize:(int)tileSize;
+
+- (instancetype _Nonnull )initWithBaseURL:(NSString *__nullable)baseURL capabilities:(MaplyWMSCapabilities *_Nullable)cap layer:(MaplyWMSLayer *_Nonnull)layer style:(MaplyWMSStyle *__nullable)style coordSys:(MaplyCoordinateSystem *_Nullable)coordSys minZoom:(int)inMinZoom maxZoom:(int)inMaxZoom tileSize:(int)tileSize parameters:(NSDictionary *__nullable)parameters headers:(NSDictionary*__nullable) headers;
 
 @end
 
