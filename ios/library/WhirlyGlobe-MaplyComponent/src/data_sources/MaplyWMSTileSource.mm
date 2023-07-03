@@ -319,6 +319,7 @@
     _imageType = @"image/png";
     _transparent = false;
     _parameters = parameters;
+    _headers = headers;
     
     return self;
 }
@@ -398,13 +399,13 @@
             [reqStr appendFormat:@"&%@=%@",key, value];
         }
     
-    NSString *fullReqStr = [reqStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+    NSString *fullReqStr = [reqStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:fullReqStr]];
     
     
     if(_headers)
-        for (id key in _parameters) {
-            NSString* value = [_parameters objectForKey:key];
+        for (id key in _headers) {
+            NSString* value = [_headers objectForKey:key];
             [request setValue:value forHTTPHeaderField:key];
         }
     
